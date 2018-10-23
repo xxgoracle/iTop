@@ -275,5 +275,5 @@ Dict::Add('FR FR', 'French', 'Français', array(
 	'Menu:RequestManagementProvider+' => 'Gestion des demandes fournisseurs',
 	'Menu:UserRequest:Provider' => 'Demandes transférées à un fournisseur',
 	'Menu:UserRequest:Provider+' => 'Demandes transférées à un fournisseur',
-	'Class:UserRequest:KnownErrorList' => 'Erreurs connues',
+	'Class:UserRequest/Attribute:knownerrors_dashboard' => 'Erreurs connues',
 ));

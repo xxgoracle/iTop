@@ -54,7 +54,7 @@ Dict::Add('EN US', 'English', 'English', array(
 	'UI-RequestManagementOverview-OpenRequestByAgent' => 'Open requests by agent',
 	'UI-RequestManagementOverview-OpenRequestByType' => 'Open requests by type',
 	'UI-RequestManagementOverview-OpenRequestByCustomer' => 'Open requests by customer',
-	'Class:UserRequest:KnownErrorList' => 'Known Errors',
+	'Class:UserRequest/Attribute:knownerrors_dashboard' => 'Known Errors',
 ));
 
 // Dictionnay conventions

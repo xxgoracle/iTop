@@ -57,7 +57,7 @@ Dict::Add('ES CR', 'Spanish', 'Español, Castellano', array(
 	'UI-RequestManagementOverview-OpenRequestByAgent' => 'Requerimientos Abiertos por Analista',
 	'UI-RequestManagementOverview-OpenRequestByType' => 'Requerimientos Abiertos por Tipo',
 	'UI-RequestManagementOverview-OpenRequestByCustomer' => 'Requerimientos Abiertos por Cliente',
-	'Class:UserRequest:KnownErrorList' => 'Errores Conocidos',
+	'Class:UserRequest/Attribute:knownerrors_dashboard' => 'Errores Conocidos',
 ));
 
 // Dictionnay conventions

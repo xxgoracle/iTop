@@ -56,7 +56,7 @@ Dict::Add('CS CZ', 'Czech', 'Čeština', array(
     'UI-RequestManagementOverview-OpenRequestByAgent' => 'Otevřené požadavky podle řešitele',
     'UI-RequestManagementOverview-OpenRequestByType' => 'Otevřené požadavky podle typu',
     'UI-RequestManagementOverview-OpenRequestByCustomer' => 'Otevřené požadavky podle zákazníka',
-    'Class:UserRequest:KnownErrorList' => 'Známé chyby',
+	'Class:UserRequest/Attribute:knownerrors_dashboard' => 'Známé chyby',
 ));
 
 // Dictionnay conventions

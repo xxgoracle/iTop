@@ -190,6 +190,7 @@ Dict::Add('FR FR', 'French', 'Français', array(
 	'Class:UserRequest/Attribute:user_comment+' => '',
 	'Class:UserRequest/Attribute:parent_request_id_friendlyname' => 'nom usuel requête parente',
 	'Class:UserRequest/Attribute:parent_request_id_friendlyname+' => '',
+	'Class:UserRequest/Attribute:knownerrors_dashboard' => 'Erreurs connues',
 	'Class:UserRequest/Stimulus:ev_assign' => 'Assigner',
 	'Class:UserRequest/Stimulus:ev_assign+' => '',
 	'Class:UserRequest/Stimulus:ev_reassign' => 'Réassigner',
@@ -284,5 +285,4 @@ Dict::Add('FR FR', 'French', 'Français', array(
 
 	'Class:UserRequest/Method:ResolveChildTickets' => 'ResolveChildTickets (résoudre les tickets fils)',
 	'Class:UserRequest/Method:ResolveChildTickets+' => 'Cascader l\'action de résolution de la demande (ev_autoresolve), et aligner les caractéristiques suivantes : service, équipe, agent, information de résolution',
-	'Class:UserRequest:KnownErrorList' => 'Erreurs connues',
 ));

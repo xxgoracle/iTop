@@ -226,7 +226,7 @@ Dict::Add('DE DE', 'German', 'Deutsch', array(
 	'UI-RequestManagementOverview-OpenRequestByAgent' => 'Offene Benutzeranfragen nach Bearbeiter',
 	'UI-RequestManagementOverview-OpenRequestByType' => 'Offene Benutzeranfragen nach Typ',
 	'UI-RequestManagementOverview-OpenRequestByCustomer' => 'Offene Benutzeranfragen nach Kunde',
-	'Class:UserRequest:KnownErrorList' => 'Known Errors',
+	'Class:UserRequest/Attribute:knownerrors_dashboard' => 'Known Errors',
 	'Class:UserRequest/Attribute:origin/Value:monitoring' => 'Monitoring',
 	'Class:UserRequest/Attribute:origin/Value:monitoring+' => '',
 	'Class:UserRequest/Attribute:approver_email' => 'Gemehhmiger-Email',

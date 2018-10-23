@@ -402,6 +402,29 @@
 					<default_value/>
 					<is_null_allowed>true</is_null_allowed>
 				</field>
+                <field id="knownerrors_dashboard" xsi:type="AttributeDashboard">
+                    <is_user_editable>false</is_user_editable>
+                    <definition>
+                      <layout>DashboardLayoutOneCol</layout>
+                      <title/>
+                      <auto_reload>
+                        <enabled>false</enabled>
+                        <interval>300</interval>
+                      </auto_reload>
+                      <cells>
+                        <cell id="0">
+                          <rank>0</rank>
+                          <dashlets>
+                            <dashlet id="1" xsi:type="DashletObjectList">
+                              <rank>0</rank>
+                                <query>SELECT KnownError AS ke JOIN lnkErrorToFunctionalCI AS l1 ON l1.error_id=ke.id JOIN FunctionalCI AS ci ON l1.functionalci_id=ci.id JOIN lnkFunctionalCIToTicket AS l2 ON l2.functionalci_id=ci.id WHERE l2.ticket_id=:this-&gt;id</query>
+                              <menu>false</menu>
+                            </dashlet>
+                          </dashlets>
+                        </cell>
+                      </cells>
+                    </definition>
+                </field>
 			</fields>
 			<lifecycle>
 				<highlight_scale>
@@ -1213,37 +1236,6 @@
 		return parent::ComputeValues();
 	}]]></code>
 				</method>
-				<method id="DisplayBareRelations">
-					<static>false</static>
-					<access>public</access>
-					<type>Overload-cmdbAbstractObject</type>
-					<code><![CDATA[	function DisplayBareRelations(WebPage $oPage, $bEditMode = false)
-	{
-		parent::DisplayBareRelations($oPage, $bEditMode);
-
-		if (!$bEditMode)
-		{
-
-			if (MetaModel::IsValidClass('KnownError'))
-			{			
-				//Search for known errors
-				$oPage->SetCurrentTab(Dict::S('Class:UserRequest:KnownErrorList'));
-				$iTicketID = $this->GetKey();;
-				$oKnownErrorSet = new CMDBObjectSet(DBObjectSearch::FromOQL("SELECT KnownError AS ke JOIN lnkErrorToFunctionalCI AS l1 ON l1.error_id=ke.id JOIN FunctionalCI AS ci ON l1.functionalci_id=ci.id JOIN lnkFunctionalCIToTicket AS l2 ON l2.functionalci_id=ci.id WHERE l2.ticket_id=$iTicketID"));
-				$iNumberKE=$oKnownErrorSet->count();
-				if ($iNumberKE > 0)
-				{
-					$oPage->SetCurrentTab(Dict::S('Class:UserRequest:KnownErrorList')." ($iNumberKE)");
-				}
-				else
-				{
-					$oPage->SetCurrentTab(Dict::S('Class:UserRequest:KnownErrorList'));	
-				}			
-				self::DisplaySet($oPage, $oKnownErrorSet, array ('menu' => false));
-			}
-		}
-	}]]></code>
-				</method>
 				<method id="resolveChilds">
 					<comment><![CDATA[/**
 	 * To be deprecated: use ResolveChildTickets() instead
@@ -1433,6 +1425,9 @@
 						</item>
 						<item id="workorders_list">
 							<rank>40</rank>
+						</item>
+						<item id="knownerrors_dashboard">
+							<rank>45</rank>
 						</item>
 						<item id="col:col1">
 							<rank>50</rank>

@@ -221,7 +221,7 @@ Dict::Add('JA JP', 'Japanese', '日本語', array(
 	'UI-RequestManagementOverview-OpenRequestByAgent' => 'エージェント別のオープンなリクエスト',
 	'UI-RequestManagementOverview-OpenRequestByType' => 'タイプ別のオープンなリクエスト',
 	'UI-RequestManagementOverview-OpenRequestByCustomer' => '顧客別のオープンなリクエスト',
-	'Class:UserRequest:KnownErrorList' => '既知のエラー',
+	'Class:UserRequest/Attribute:knownerrors_dashboard' => '既知のエラー',
 	'Class:UserRequest/Attribute:origin/Value:monitoring' => 'モニタリング',
 	'Class:UserRequest/Attribute:origin/Value:monitoring+' => 'モニタリング',
 	'Class:UserRequest/Attribute:approver_email' => '承認者メール',

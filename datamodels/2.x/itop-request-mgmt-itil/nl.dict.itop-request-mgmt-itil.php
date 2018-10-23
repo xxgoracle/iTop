@@ -54,7 +54,7 @@ Dict::Add('NL NL', 'Dutch', 'Nederlands', array(
 	'UI-RequestManagementOverview-OpenRequestByAgent' => 'Open verzoeken per medewerker',
 	'UI-RequestManagementOverview-OpenRequestByType' => 'Open verzoeken per type',
 	'UI-RequestManagementOverview-OpenRequestByCustomer' => 'Open verzoeken per organisatie',
-	'Class:UserRequest:KnownErrorList' => 'Bekende fouten',
+	'Class:UserRequest/Attribute:knownerrors_dashboard' => 'Bekende fouten',
 ));
 
 // Dictionnay conventions

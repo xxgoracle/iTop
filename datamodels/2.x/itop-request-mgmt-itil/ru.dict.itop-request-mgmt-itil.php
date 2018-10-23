@@ -40,7 +40,7 @@ Dict::Add('RU RU', 'Russian', 'Русский', array(
 	'UI-RequestManagementOverview-OpenRequestByAgent' => 'Открытые запросы по агенту',
 	'UI-RequestManagementOverview-OpenRequestByType' => 'Открытые запросы по типу',
 	'UI-RequestManagementOverview-OpenRequestByCustomer' => 'Открытые запросы по заказчику',
-	'Class:UserRequest:KnownErrorList' => 'Известные ошибки',
+	'Class:UserRequest/Attribute:knownerrors_dashboard' => 'Известные ошибки',
 ));
 
 // Dictionnay conventions

@@ -223,7 +223,7 @@ Dict::Add('DA DA', 'Danish', 'Dansk', array(
 	'UI-RequestManagementOverview-OpenRequestByAgent' => 'Åbne brugerhenvendelser efter tildelt til',
 	'UI-RequestManagementOverview-OpenRequestByType' => 'Åbne brugerhenvendelser efter type',
 	'UI-RequestManagementOverview-OpenRequestByCustomer' => 'Åbne brugerhenvendelser efter bruger',
-	'Class:UserRequest:KnownErrorList' => 'Known Errors',
+	'Class:UserRequest/Attribute:knownerrors_dashboard' => 'Known Errors',
 	'Class:UserRequest/Attribute:origin/Value:monitoring' => 'Monitoring',
 	'Class:UserRequest/Attribute:origin/Value:monitoring+' => '',
 	'Class:UserRequest/Attribute:approver_email' => 'Godkender Email',

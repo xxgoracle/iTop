@@ -54,7 +54,7 @@ Dict::Add('PT BR', 'Brazilian', 'Brazilian', array(
 	'UI-RequestManagementOverview-OpenRequestByAgent' => 'Solicitações abertas por agente',
 	'UI-RequestManagementOverview-OpenRequestByType' => 'Solicitações abertas por tipo',
 	'UI-RequestManagementOverview-OpenRequestByCustomer' => 'Solicitações abertas por cliente',
-	'Class:UserRequest:KnownErrorList' => 'Erros conhecidos',
+	'Class:UserRequest/Attribute:knownerrors_dashboard' => 'Erros conhecidos',
 ));
 
 // Dictionnay conventions
