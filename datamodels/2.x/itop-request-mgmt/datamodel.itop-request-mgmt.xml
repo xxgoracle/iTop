@@ -1726,6 +1726,44 @@
                 </list>
             </presentation>
         </class>
+        <class id="FunctionalCI" _delta="if_exists">
+            <fields>
+                <field id="active_tickets_dashboard" xsi:type="AttributeDashboard" _delta="define">
+                    <is_user_editable>true</is_user_editable>
+                    <definition>
+                      <layout>DashboardLayoutOneCol</layout>
+                      <title/>
+                      <auto_reload>
+                        <enabled>false</enabled>
+                        <interval>300</interval>
+                      </auto_reload>
+                      <cells>
+                        <cell id="0">
+                          <rank>0</rank>
+                          <dashlets>
+                            <dashlet id="1" xsi:type="DashletObjectList">
+                              <rank>0</rank>
+                              <query>SELECT UserRequest AS t JOIN lnkFunctionalCIToTicket AS lnk ON lnk.ticket_id = t.id WHERE
+                                  lnk.functionalci_id = :this->id AND t.operational_status != 'closed' AND lnk.impact_code !=
+                                  'not_impacted'</query>
+                              <menu>false</menu>
+                            </dashlet>
+                          </dashlets>
+                        </cell>
+                      </cells>
+                    </definition>
+                </field>
+            </fields>
+            <presentation>
+                <details>
+                  <items>
+                      <item id="active_tickets_dashboard" _delta="define">
+                          <rank>120</rank>
+                      </item>
+                  </items>
+                </details>
+            </presentation>
+        </class>
     </classes>
     <menus>
         <menu id="WelcomeMenuPage" xsi:type="DashboardMenuNode" _delta="must_exist">
