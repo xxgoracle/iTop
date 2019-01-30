@@ -1,0 +1,101 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+imports:
+    - { resource: "legacy_silex_compat_layer.php" }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+#    combodo.portal.base.absolute_url: foo
+#    router.options.generator_class: Combodo\iTop\Portal\Routing\UrlGeneratorItop
+    router.options.generator_base_class: Combodo\iTop\Portal\Routing\UrlGeneratorItop
+    itop.cache_path: '%env(ITOP_CACHE_PATH)%'
+    itop.portal_id: !php/const PORTAL_ID
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+        public: false       # Allows optimizing the container by removing unused services; this also means
+                            # fetching services directly from the container via $container->get() won't work.
+                            # The best practice is to be explicit about your dependencies anyway.
+#    _instanceof:
+#        Combodo\iTop\Portal\Brick\AbstractBrick:
+#            tags: ['combodo.portal.brick']
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    Combodo\iTop\Portal\:
+        resource: '../src/*'
+        exclude: '../src/{DependencyInjection,Entity,Migrations,Tests,Kernel.php}'
+
+    # controllers are imported separately to make sure services can be injected
+    # as action arguments even if you don't extend any base controller class
+    Combodo\iTop\Portal\Controller\:
+        resource: '../src/Controller'
+        tags: ['controller.service_arguments']
+
+    # add more service definitions when explicit configuration is needed
+    # please note that last definitions always *replace* previous ones
+
+
+
+#    router.default:
+#        alias: Combodo\iTop\Portal\Routing\UrlGeneratorItop
+
+#    Combodo\iTop\Portal\Routing\UrlGeneratorItop:
+#        decorates: 'Symfony\Component\Routing\Generator\UrlGenerator'
+#        arguments: ['@Combodo\iTop\Portal\Routing\UrlGeneratorItop.inner']
+#        public:    false
+
+#    router:
+#        calls:
+#            - [setOptions, {'generator_class': Combodo\iTop\Portal\Routing\UrlGeneratorItop}]
+
+    ModuleDesign:
+        class: 'ModuleDesign'
+        arguments:
+            - '%itop.portal_id%'
+
+    Combodo\iTop\Portal\EventListener\ItopUserProvider:
+        arguments:
+            - '@ModuleDesign'
+            - '@Combodo\iTop\Portal\Security\ItopUser'
+            - '%combodo.portal.base.absolute_url%'
+        tags:
+            - { name: 'kernel.event_listener',  event: 'kernel.request'  }
+
+
+#    Combodo\iTop\Portal\SilexCompatibilityBridge\SilexApplicationEmulation:
+#        calls:
+#            - [setContainer, ['@service_container']]
+
+    Combodo\iTop\Portal\Twig\AppVariable:
+        decorates: twig.app_variable
+        arguments:
+            - '@Combodo\iTop\Portal\Twig\AppVariable.inner'
+#            - '@Combodo\iTop\Portal\SilexCompatibilityBridge\SilexApplicationEmulation'
+        calls:
+            - [setContainer, ['@service_container']]
+
+    bricks_collection:
+        alias: Combodo\iTop\Portal\Bricks\BricksCollection
+        public: true
+
+
+    request_manipulator:
+        alias: Combodo\iTop\Portal\Helper\RequestManipulatorHelper
+        public: true
+
+
+    Combodo\iTop\Portal\Helper\ScopeValidatorHelper:
+        arguments:
+            - '@ModuleDesign'
+            - '%itop.portal_id%'
+            - '%itop.cache_path%'
+
+    scope_validator:
+        alias: Combodo\iTop\Portal\Helper\ScopeValidatorHelper
+        public: true
