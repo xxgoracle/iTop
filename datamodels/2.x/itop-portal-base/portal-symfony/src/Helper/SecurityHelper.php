@@ -159,7 +159,16 @@ class SecurityHelper
 		return true;
 	}
 
-	public static function IsStimulusAllowed(Application $oApp, $sStimulusCode, $sObjectClass, $oInstanceSet = null)
+    /**
+     * @param LifecycleValidatorHelper $lifecycleValidator
+     * @param                          $sStimulusCode
+     * @param                          $sObjectClass
+     * @param null                     $oInstanceSet
+     *
+     * @return bool
+     * @throws \Exception
+     */
+	public static function IsStimulusAllowed(LifecycleValidatorHelper $lifecycleValidator, $sStimulusCode, $sObjectClass, $oInstanceSet = null)
 	{
 	    // Checking DataModel layer
         $aStimuliFromDatamodel = Metamodel::EnumStimuli($sObjectClass);
@@ -170,7 +179,7 @@ class SecurityHelper
         }
 
         // Checking portal security layer
-        $aStimuliFromPortal = $oApp['lifecycle_validator']->GetStimuliForProfiles(UserRights::ListProfiles(), $sObjectClass);
+        $aStimuliFromPortal = $lifecycleValidator->GetStimuliForProfiles(UserRights::ListProfiles(), $sObjectClass);
 		if(!in_array($sStimulusCode, $aStimuliFromPortal))
         {
             return false;

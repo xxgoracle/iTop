@@ -36,13 +36,15 @@ class LifecycleValidatorHelper
 	protected $sGeneratedClass;
 	protected $aProfilesMatrix;
 
-	public function __construct($sFilename, $sCachePath = null)
+	public function __construct(\ModuleDesign $moduleDesign, $portalId, $sCachePath = null)
 	{
-		$this->sFilename = $sFilename;
+		$this->sFilename = "{$portalId}.lifecycle.php";
 		$this->sCachePath = $sCachePath;
-		$this->sInstancePrefix = '';
+		$this->sInstancePrefix = "{$portalId}-";;
 		$this->sGeneratedClass = static::DEFAULT_GENERATED_CLASS;
 		$this->aProfilesMatrix = array();
+
+        $this->Init($moduleDesign->GetNodes('/module_design/classes/class'));
 	}
 
 	/**

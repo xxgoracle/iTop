@@ -736,9 +736,8 @@ class ApplicationHelper
      *
 	 * @throws \CoreException
 	 */
-	public static function GetLoadedFormFromClass(Application $oApp, $sClass, $sMode)
+	public static function GetLoadedFormFromClass($aForms, $sClass, $sMode)
 	{
-		$aForms = $oApp['combodo.portal.instance.conf']['forms'];
 
 		// We try to find the form for that class
 		if (isset($aForms[$sClass]) && isset($aForms[$sClass][$sMode]))
@@ -769,23 +768,23 @@ class ApplicationHelper
 		return $aForm;
 	}
 
-	/**
-	 * Return the attribute list for the $sClassname in $sList.
-	 *
-	 * If not found, tries to find one from the closest parent class.
-	 * Else returns a default attribute list based on zlist 'list'
-	 *
-	 * @param Application $oApp
-	 * @param string $sClass Object class to find a list for
-	 * @param string $sList List name to find
-	 *
-	 * @return array Array of attribute codes
+    /**
+     * Return the attribute list for the $sClassname in $sList.
      *
-	 * @throws \CoreException
-	 */
-	public static function GetLoadedListFromClass(Application $oApp, $sClass, $sList = 'default')
+     * If not found, tries to find one from the closest parent class.
+     * Else returns a default attribute list based on zlist 'list'
+     *
+     * @param array  $combodoPortalInstanceConf
+     * @param string $sClass Object class to find a list for
+     * @param string $sList  List name to find
+     *
+     * @return array Array of attribute codes
+     *
+     * @throws \CoreException
+     */
+	public static function GetLoadedListFromClass($combodoPortalInstanceConf, $sClass, $sList = 'default')
 	{
-		$aLists = $oApp['combodo.portal.instance.conf']['lists'];
+		$aLists = $combodoPortalInstanceConf['lists'];
 		$aList = null;
 		$aAttCodes = array();
 

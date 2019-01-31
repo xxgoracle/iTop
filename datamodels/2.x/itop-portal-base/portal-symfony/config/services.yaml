@@ -8,7 +8,6 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
 #    combodo.portal.base.absolute_url: foo
-#    router.options.generator_class: Combodo\iTop\Portal\Routing\UrlGeneratorItop
     router.options.generator_base_class: Combodo\iTop\Portal\Routing\UrlGeneratorItop
     itop.cache_path: '%env(ITOP_CACHE_PATH)%'
     itop.portal_id: !php/const PORTAL_ID
@@ -98,4 +97,18 @@ services:
 
     scope_validator:
         alias: Combodo\iTop\Portal\Helper\ScopeValidatorHelper
+        public: true
+
+    context_manipulator:
+        alias: Combodo\iTop\Portal\Helper\ContextManipulatorHelper
+        public: true
+
+    Combodo\iTop\Portal\Helper\LifecycleValidatorHelper:
+        arguments:
+            - '@ModuleDesign'
+            - '%itop.portal_id%'
+            - '%itop.cache_path%'
+
+    lifecycle_validator:
+        alias: Combodo\iTop\Portal\Helper\LifecycleValidatorHelper
         public: true

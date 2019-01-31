@@ -242,7 +242,7 @@ class Forms extends AbstractConfiguration
             }
         }
 
-        $container->set('combodo.portal.instance.forms', $aForms); //['combodo.portal.instance.conf'][...]
+        $container->setParameter('combodo.portal.instance.forms', $aForms); //['combodo.portal.instance.conf'][...]
     }
 
 

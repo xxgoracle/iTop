@@ -19,10 +19,13 @@
 
 namespace Combodo\iTop\Portal\Helper;
 
+use Combodo\iTop\Portal\Bricks\BricksCollection;
 use Exception;
 use Silex\Application;
 use DOMNodeList;
 use DOMFormatException;
+use Symfony\Bundle\FrameworkBundle\Routing\Router;
+use Symfony\Component\Routing\RouterInterface;
 use UserRights;
 use DBObject;
 use DBSearch;
@@ -40,13 +43,26 @@ class ContextManipulatorHelper
 	const ENUM_RULE_CALLBACK_OPEN_EDIT = 'edit';
 	const DEFAULT_RULE_CALLBACK_OPEN = self::ENUM_RULE_CALLBACK_OPEN_VIEW;
 
-	protected $oApp;
 	protected $aRules;
 
-	public function __construct()
+    /** @var Router */
+    private $router;
+    /** @var BricksCollection */
+    private $bricksCollection;
+    /**
+     * @var ScopeValidatorHelper
+     */
+    private $scopeValidator;
+
+    public function __construct(\ModuleDesign $moduleDesign, RouterInterface $router, BricksCollection $bricksCollection, ScopeValidatorHelper $scopeValidator)
 	{
 		$this->aRules = array();
-	}
+        $this->router = $router;
+        $this->bricksCollection = $bricksCollection;
+
+        $this->Init($moduleDesign->GetNodes('/module_design/action_rules/action_rule'));
+        $this->scopeValidator = $scopeValidator;
+    }
 
 	/**
 	 * Initializes the ScopeValidator by generating and caching the scopes compilation in the $this->sCachePath.$this->sFilename file.
@@ -181,10 +197,6 @@ class ContextManipulatorHelper
 		}
 	}
 
-	public function SetApp($oApp)
-	{
-		$this->oApp = $oApp;
-	}
 
 	/**
 	 * Returns a hash array of rules
@@ -302,7 +314,7 @@ class ContextManipulatorHelper
 					}
 
 					// Checking for silos
-					$oScopeSearch = $this->oApp['scope_validator']->GetScopeFilterForProfiles(UserRights::ListProfiles(), $sSearchClass, UR_ACTION_READ);
+					$oScopeSearch = $this->scopeValidator->GetScopeFilterForProfiles(UserRights::ListProfiles(), $sSearchClass, UR_ACTION_READ);
 					if ($oScopeSearch->IsAllDataAllowed())
 					{
 						$oSearch->AllowAllData();
@@ -349,7 +361,6 @@ class ContextManipulatorHelper
      *     'cancel' => null
      * );
      *
-     * @param \Silex\Application $oApp
      * @param array $aData
      * @param \DBObject $oObject
      * @param boolean $bModal
@@ -358,7 +369,7 @@ class ContextManipulatorHelper
      *
      * @throws \Exception
      */
-	public function GetCallbackUrls(Application $oApp, array $aData, DBObject $oObject, $bModal = false)
+	public function GetCallbackUrls(array $aData, DBObject $oObject, $bModal = false)
 	{
 		$aResults = array(
 			'submit' => null,
@@ -389,12 +400,12 @@ class ContextManipulatorHelper
 								break;
 
 							case static::ENUM_RULE_CALLBACK_GOTO:
-								$oBrick = ApplicationHelper::GetLoadedBrickFromId($oApp, $aRule[$sCallbackName]['brick_id']);
-								$sCallbackUrl = $oApp['url_generator']->generate($oBrick->GetRouteName(), array('sBrickId' => $oBrick->GetId()));
+								$oBrick = $this->bricksCollection->getBrickById($aRule[$sCallbackName]['brick_id']); //ApplicationHelper::GetLoadedBrickFromId($oApp, $aRule[$sCallbackName]['brick_id']);
+								$sCallbackUrl = $this->router->generate($oBrick->GetRouteName(), array('sBrickId' => $oBrick->GetId()));
 								break;
 
 							case static::ENUM_RULE_CALLBACK_OPEN:
-								$sCallbackUrl = ($oObject->IsNew()) ? null : $oApp['url_generator']->generate('p_object_' . $aRule[$sCallbackName]['mode'], array('sObjectClass' => get_class($oObject), 'sObjectId' => $oObject->GetKey()));
+								$sCallbackUrl = ($oObject->IsNew()) ? null : $this->router->generate('p_object_' . $aRule[$sCallbackName]['mode'], array('sObjectClass' => get_class($oObject), 'sObjectId' => $oObject->GetKey()));
 								break;
 						}
 

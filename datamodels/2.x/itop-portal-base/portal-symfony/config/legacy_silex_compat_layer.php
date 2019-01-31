@@ -61,14 +61,14 @@ $formsCompat->process($container);
 //$scopesCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\Scopes($moduleDesign);
 //$scopesCompat->process($container);
 
-$lifecycleCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\Lifecyles($moduleDesign);
-$lifecycleCompat->process($container);
+//$lifecycleCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\Lifecyles($moduleDesign);
+//$lifecycleCompat->process($container);
 
 $listesCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\Lists($moduleDesign);
 $listesCompat->process($container);
 
-$actionRulesCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\ActionRules($moduleDesign);
-$actionRulesCompat->process($container);
+//$actionRulesCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\ActionRules($moduleDesign);
+//$actionRulesCompat->process($container);
 
 // - Setting UrlMakerClass
 if ($container->getParameter('combodo.portal.instance.conf')['properties']['urlmaker_class'] !== null)
