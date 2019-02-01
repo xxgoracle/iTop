@@ -63,7 +63,26 @@ class DefaultController extends Controller
 ////                $oController =  $this->get($sControllerName);
                 $oController = new $sControllerName();
                 $oController->setContainer($this->container);
-                $aData['aTilesRendering'][$oBrick->GetId()] = $oController->$sControllerAction($oRequest, $oBrick->GetId());
+                /** @var Response $oResponse */
+                $oResponse = $oController->$sControllerAction($oRequest, $oBrick->GetId());
+                if ($oResponse->isSuccessful()) {
+                    $aData['aTilesRendering'][$oBrick->GetId()] = $oResponse->getContent();
+                } else {
+                    $aData['aTilesRendering'][$oBrick->GetId()] = '
+<div class="col-xs-12 col-sm-6">
+        <div class="tile_decoration">
+            <span class="icon fc fc-ongoing-request fc-2x"></span>
+        </div>
+        <div class="tile_body">
+            <div class="tile_title">Oups!</div>
+                <div class="tile_description">
+                <p>An unexpected error happened,</p>
+                <p>This brick cannot be dispayed for now.</p>
+                </div>
+                    </div>
+    </div>'
+                    ;
+                }
             }
         }
 
