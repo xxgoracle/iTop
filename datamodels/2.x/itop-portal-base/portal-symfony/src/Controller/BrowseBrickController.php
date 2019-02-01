@@ -379,7 +379,7 @@ class BrowseBrickController extends BrickController
 
 				case BrowseBrick::ENUM_BROWSE_MODE_LIST:
 				default:
-					$aItems[] = static::AddToFlatItems($aCurrentRow, $aLevelsProperties);
+					$aItems[] = static::AddToFlatItems($aCurrentRow, $aLevelsProperties, $router);
 					break;
 			}
 		}

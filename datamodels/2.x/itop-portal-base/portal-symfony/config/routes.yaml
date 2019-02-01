@@ -22,3 +22,6 @@ user_profile:
 
 object_router:
   resource: 'routes/object_router.php'
+
+extensions_extra_routes:
+  resource: 'routes/extensions_extra_routes.php'
