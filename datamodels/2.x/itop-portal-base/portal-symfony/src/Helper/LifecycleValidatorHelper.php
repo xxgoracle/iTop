@@ -19,6 +19,8 @@
 
 namespace Combodo\iTop\Portal\Helper;
 
+use Combodo\iTop\Portal\VariableAccessor\ItopCachePath;
+use Combodo\iTop\Portal\VariableAccessor\ItopPortalId;
 use Exception;
 use DOMNodeList;
 use DOMFormatException;
@@ -36,7 +38,7 @@ class LifecycleValidatorHelper
 	protected $sGeneratedClass;
 	protected $aProfilesMatrix;
 
-	public function __construct(\ModuleDesign $moduleDesign, $portalId, $sCachePath = null)
+	public function __construct(\ModuleDesign $moduleDesign, ItopPortalId $portalId, ItopCachePath $sCachePath = null)
 	{
 		$this->sFilename = "{$portalId}.lifecycle.php";
 		$this->sCachePath = $sCachePath;

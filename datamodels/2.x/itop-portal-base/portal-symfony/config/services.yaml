@@ -41,17 +41,19 @@ services:
 
 
 
-#    router.default:
-#        alias: Combodo\iTop\Portal\Routing\UrlGeneratorItop
 
-#    Combodo\iTop\Portal\Routing\UrlGeneratorItop:
-#        decorates: 'Symfony\Component\Routing\Generator\UrlGenerator'
-#        arguments: ['@Combodo\iTop\Portal\Routing\UrlGeneratorItop.inner']
-#        public:    false
+    Combodo\iTop\Portal\VariableAccessor\ItopPortalId:
+        arguments:
+            - '%itop.portal_id%'
 
-#    router:
-#        calls:
-#            - [setOptions, {'generator_class': Combodo\iTop\Portal\Routing\UrlGeneratorItop}]
+    Combodo\iTop\Portal\VariableAccessor\ItopCachePath:
+        arguments:
+            - '%itop.cache_path%'
+
+    Combodo\iTop\Portal\VariableAccessor\CombodoPortalBaseAbsoluteUrl:
+        arguments:
+            - '%combodo.portal.base.absolute_url%'
+
 
     ModuleDesign:
         class: 'ModuleDesign'
@@ -75,7 +77,6 @@ services:
         decorates: twig.app_variable
         arguments:
             - '@Combodo\iTop\Portal\Twig\AppVariable.inner'
-#            - '@Combodo\iTop\Portal\SilexCompatibilityBridge\SilexApplicationEmulation'
         calls:
             - [setContainer, ['@service_container']]
 
@@ -88,13 +89,6 @@ services:
         alias: Combodo\iTop\Portal\Helper\RequestManipulatorHelper
         public: true
 
-
-    Combodo\iTop\Portal\Helper\ScopeValidatorHelper:
-        arguments:
-            - '@ModuleDesign'
-            - '%itop.portal_id%'
-            - '%itop.cache_path%'
-
     scope_validator:
         alias: Combodo\iTop\Portal\Helper\ScopeValidatorHelper
         public: true
@@ -102,12 +96,6 @@ services:
     context_manipulator:
         alias: Combodo\iTop\Portal\Helper\ContextManipulatorHelper
         public: true
-
-    Combodo\iTop\Portal\Helper\LifecycleValidatorHelper:
-        arguments:
-            - '@ModuleDesign'
-            - '%itop.portal_id%'
-            - '%itop.cache_path%'
 
     lifecycle_validator:
         alias: Combodo\iTop\Portal\Helper\LifecycleValidatorHelper
