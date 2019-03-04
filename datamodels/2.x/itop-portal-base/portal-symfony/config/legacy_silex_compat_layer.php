@@ -51,24 +51,11 @@ if ($container->has('ModuleDesign')) {
 $basicCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\Basic($moduleDesign);
 $basicCompat->process($container);
 
-//commented out because Bricks is replaced by BricksCollection
-//$bricksCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\Bricks($moduleDesign);
-//$bricksCompat->process($container);
-
 $formsCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\Forms($moduleDesign);
 $formsCompat->process($container);
 
-//$scopesCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\Scopes($moduleDesign);
-//$scopesCompat->process($container);
-
-//$lifecycleCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\Lifecyles($moduleDesign);
-//$lifecycleCompat->process($container);
-
 $listesCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\Lists($moduleDesign);
 $listesCompat->process($container);
-
-//$actionRulesCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\ActionRules($moduleDesign);
-//$actionRulesCompat->process($container);
 
 // - Setting UrlMakerClass
 if ($container->getParameter('combodo.portal.instance.conf')['properties']['urlmaker_class'] !== null)
@@ -137,17 +124,3 @@ if ((array_key_exists('obj_messages', $_SESSION)) && (!empty($_SESSION['obj_mess
 $container->setParameter('combodo.current_user.session_messages', $aAllMessages);
 //end of session messages
 
-
-//$actionRulesCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\ItopUserProvider($moduleDesign);
-//$actionRulesCompat->process($container);
-
-//TODO: provide the user!!!
-
-
-//Combodo\iTop\Portal\Routing\UrlGeneratorItop:
-#        decorates: 'Symfony\Component\Routing\Generator\UrlGenerator'
-#        arguments: ['@Combodo\iTop\Portal\Routing\UrlGeneratorItop.inner']
-#        public:    false
-#    router:
-#        calls:
-#            - [setOptions, {'generator_class': Combodo\iTop\Portal\Routing\UrlGeneratorItop}]
