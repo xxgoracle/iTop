@@ -9,6 +9,7 @@ namespace Combodo\iTop\Portal\EventListener;
 
 
 use Combodo\iTop\Portal\Security\ItopUser;
+use Combodo\iTop\Portal\VariableAccessor\CombodoPortalBaseAbsoluteUrl;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Exception;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -21,14 +22,12 @@ class ItopUserProvider
 {
     /** @var \ModuleDesign */
     private $moduleDesign;
-    /**  @var ItopUser  */
+    /** @var ItopUser */
     private $itopUser;
-    /**
-     * @var string
-     */
+    /** @var CombodoPortalBaseAbsoluteUrl */
     private $combodoPortalBaseAbsoluteUrl;
 
-    public function __construct(\ModuleDesign $moduleDesign, ItopUser $itopUser, string $combodoPortalBaseAbsoluteUrl)
+    public function __construct(\ModuleDesign $moduleDesign, ItopUser $itopUser, CombodoPortalBaseAbsoluteUrl $combodoPortalBaseAbsoluteUrl)
     {
         $this->moduleDesign = $moduleDesign;
         $this->itopUser = $itopUser;
