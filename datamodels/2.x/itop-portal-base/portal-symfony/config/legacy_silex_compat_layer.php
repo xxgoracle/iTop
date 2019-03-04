@@ -60,6 +60,7 @@ $listesCompat->process($container);
 // - Setting UrlMakerClass
 if ($container->getParameter('combodo.portal.instance.conf')['properties']['urlmaker_class'] !== null)
 {
+    //TODO: this is an example of a not working code: since the container is compiled, this code will not be executed on each request on a production env. and thus would fail it must be moved in an (early) event listener (@see ItopUserProvider)
     ApplicationContext::SetUrlMakerClass($container->getParameter('combodo.portal.instance.conf')['properties']['urlmaker_class']);
 }
 
