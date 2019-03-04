@@ -13,19 +13,19 @@ abstract class AbstractVariableAccessor
     /**
      * @var string
      */
-    private $sStoredVariable;
+    private $mStoredVariable;
 
     /**
-     * @param string $sVariableToStore
+     * @param string $mVariableToStore
      */
-    public function __construct($sVariableToStore)
+    public function __construct($mVariableToStore)
     {
 
-        $this->sStoredVariable = $sVariableToStore;
+        $this->mStoredVariable = $mVariableToStore;
     }
     
-    public function __toString()
+    public function getVariable()
     {
-        return $this->sStoredVariable;
+        return $this->mStoredVariable;
     }
 }

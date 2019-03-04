@@ -1,14 +1,6 @@
 <?php
-// Configuring Silex application
-//$oApp['debug'] = $bDebug;
-
-
-
-use Combodo\iTop\Portal\Helper\ApplicationHelper;
-
-
-
 if (!defined('PORTAL_ID') || PORTAL_ID === false) {
+    //you are probably running as a CLI script, @todo: find a better handling of this case...
     return;
 }
 
@@ -57,13 +49,6 @@ $formsCompat->process($container);
 $listesCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\Lists($moduleDesign);
 $listesCompat->process($container);
 
-// - Setting UrlMakerClass
-if ($container->getParameter('combodo.portal.instance.conf')['properties']['urlmaker_class'] !== null)
-{
-    //TODO: this is an example of a not working code: since the container is compiled, this code will not be executed on each request on a production env. and thus would fail it must be moved in an (early) event listener (@see ItopUserProvider)
-    ApplicationContext::SetUrlMakerClass($container->getParameter('combodo.portal.instance.conf')['properties']['urlmaker_class']);
-}
-
 // - Generating CSS files
 $aImportPaths = array($container->getParameter('combodo.portal.base.absolute_path').'css/');
 $aPortalConf = $container->getParameter('combodo.portal.instance.conf');
@@ -87,6 +72,7 @@ $container->setParameter('combodo.portal.instance.conf', $aPortalConf);
 
 
 //session messages
+//TODO: have a debate with Guillaume as I think that session messages would only be destroyed if dispalyed (as of the default behaviour of flash message within symfony)
 $aAllMessages = array();
 if ((array_key_exists('obj_messages', $_SESSION)) && (!empty($_SESSION['obj_messages'])))
 {
@@ -121,7 +107,6 @@ if ((array_key_exists('obj_messages', $_SESSION)) && (!empty($_SESSION['obj_mess
         }
     }
 }
-//$oApp['combodo.current_user.session_messages'] = $aAllMessages;
 $container->setParameter('combodo.current_user.session_messages', $aAllMessages);
 //end of session messages
 

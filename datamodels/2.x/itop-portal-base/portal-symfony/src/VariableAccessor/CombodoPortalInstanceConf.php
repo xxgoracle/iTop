@@ -1,14 +1,14 @@
 <?php
 /**
  * Created by Bruno DA SILVA, working for Combodo
- * Date: 28/02/19
- * Time: 16:59
+ * Date: 04/03/19
+ * Time: 17:43
  */
 
 namespace Combodo\iTop\Portal\VariableAccessor;
 
 
-class ItopPortalId extends AbstractStringVariableAccessor
+class CombodoPortalInstanceConf extends AbstractVariableAccessor
 {
 
 }

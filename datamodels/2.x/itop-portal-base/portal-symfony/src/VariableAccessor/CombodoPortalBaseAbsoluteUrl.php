@@ -8,7 +8,7 @@
 namespace Combodo\iTop\Portal\VariableAccessor;
 
 
-class CombodoPortalBaseAbsoluteUrl extends AbstractVariableAccessor
+class CombodoPortalBaseAbsoluteUrl extends AbstractStringVariableAccessor
 {
 
 }

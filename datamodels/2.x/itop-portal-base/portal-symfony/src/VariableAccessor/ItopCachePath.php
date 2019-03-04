@@ -8,7 +8,7 @@
 namespace Combodo\iTop\Portal\VariableAccessor;
 
 
-class ItopCachePath extends AbstractVariableAccessor
+class ItopCachePath extends AbstractStringVariableAccessor
 {
 
 }

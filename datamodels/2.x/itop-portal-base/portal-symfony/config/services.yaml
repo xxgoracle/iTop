@@ -37,14 +37,19 @@ services:
     # tag services without definig them (see https://symfony.com/doc/current/service_container/tags.html#autoconfiguring-tags)
     _instanceof:
         Combodo\iTop\Portal\EventListener\ItopUserProvider:
-            tags:
-                - { name: 'kernel.event_listener',  event: 'kernel.request'  }
+            tags: [{ name: 'kernel.event_listener',  event: 'kernel.request'  }]
+        Combodo\iTop\Portal\EventListener\ApplicationContextSetUrlMakerClass:
+            tags: [{ name: 'kernel.event_listener',  event: 'kernel.request'  }]
 
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
 
     # VariableAccessor: when a service require a parameter, you have to fully declare it: let's create intermediate (& simple) services and have them auto-wired
+    Combodo\iTop\Portal\VariableAccessor\CombodoPortalInstanceConf:
+        arguments:
+            - '%combodo.portal.instance.conf%'
+
     Combodo\iTop\Portal\VariableAccessor\ItopPortalId:
         arguments:
             - '%itop.portal_id%'
@@ -56,7 +61,6 @@ services:
     Combodo\iTop\Portal\VariableAccessor\CombodoPortalBaseAbsoluteUrl:
         arguments:
             - '%combodo.portal.base.absolute_url%'
-
 
     # legacy code as a service: since it is not in the auto-wiring path, it needs to be explicitly declared
     ModuleDesign:
