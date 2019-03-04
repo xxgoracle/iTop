@@ -31,7 +31,7 @@ if (!defined('PORTAL_ID')) {
     throw new \Exception('Cannot load module design, Portal ID is not defined');
 }
 
-$_SERVER['APP_ENV'] = $_SERVER['APP_ENV'] . ucfirst(str_replace('-', '_', PORTAL_ID)) . ucfirst(utils::GetCurrentEnvironment());
+$_SERVER['APP_ENV'] = utils::GetCurrentEnvironment(); 
 
 $_ENV['ITOP_CACHE_PATH'] = utils::GetCachePath();
 

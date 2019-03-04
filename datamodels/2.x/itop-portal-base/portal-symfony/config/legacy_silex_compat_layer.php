@@ -1,4 +1,13 @@
 <?php
+
+// A bunch of dependency injections parameters are appended buy this code.
+// It was originally wrote with the required interface in order to be compiled,
+// but since it only write parameters, it make more sens to have this file included.
+// This is a rewrite of initialisation wrote in the previous portal wrote using silex.
+// The idea behind the rewrite is to try to keep the original logic, even if it is not in line with symfony's conventions.
+// IE: a few huge parameters are created, it would have been preferable to create a lot of small parameters...
+
+
 if (!defined('PORTAL_ID') || PORTAL_ID === false) {
     //you are probably running as a CLI script, @todo: find a better handling of this case...
     return;
@@ -25,19 +34,11 @@ $container->setParameter('combodo.portal.instance.routes', array());
 
 
 
-// A bunch of dependency injections happens here, It was originally wrote with the required interface in order to be compiled,
-// but a lot of the code is context dependent and must not be compiled.
-// This is a rewrite of initialisation wrote in the previous portal wrote using silex. The idea behind the rewrite is to
-// try to keep the original logic, even if it is not in line with symfony's conventions.
-// TODO: Once the code is stabilized, it should be refactored in order to be more conventional.
-
-
 // Loading file
 if ($container->has('ModuleDesign')) {
     $moduleDesign = $container->get('ModuleDesign');
 } else {
     $moduleDesign =  new \ModuleDesign(PORTAL_ID);
-//    $container->set('ModuleDesign', $moduleDesign);
 }
 
 $basicCompat = new \Combodo\iTop\Portal\DependencyInjection\SilexCompatBootstrap\PortalXmlConfiguration\Basic($moduleDesign);

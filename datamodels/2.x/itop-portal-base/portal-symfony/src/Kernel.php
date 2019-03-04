@@ -22,12 +22,16 @@ class Kernel extends BaseKernel
 
     public function getCacheDir()
     {
-        return APPROOT.'/data/portal-symfony/var/cache/'.$this->environment;
+        $cacheDir = ucfirst(str_replace('-', '_', PORTAL_ID)) . ucfirst($this->environment);
+
+        return APPROOT.'/data/portal-symfony/var/cache/'.$cacheDir;
     }
 
     public function getLogDir()
     {
-        return APPROOT.'/data/portal-symfony/var/log/'.$this->environment;
+        $logDir = ucfirst(str_replace('-', '_', PORTAL_ID)) . ucfirst($this->environment);
+
+        return APPROOT.'/data/portal-symfony/var/log/'.$logDir;
     }
 
     public function registerBundles()
