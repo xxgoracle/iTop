@@ -17,13 +17,6 @@ class SilexApplicationEmulation implements \ArrayAccess, ContainerAwareInterface
     /** @var ContainerInterface */
     private $container;
 
-    //TODO: remove this var, becausel it is no more required since services alias are defined.
-    private $aliases = array(
-//      'url_generator' => 'router',
-    );
-
-
-
     /**
      * Sets the container.
      *
@@ -33,11 +26,6 @@ class SilexApplicationEmulation implements \ArrayAccess, ContainerAwareInterface
     {
         $this->container = $container;
     }
-
-//    public function __call($method, $parameters)
-//    {
-//        return $this->offsetGet($method);
-//    }
 
     /**
      * Whether a offset exists
@@ -62,10 +50,6 @@ class SilexApplicationEmulation implements \ArrayAccess, ContainerAwareInterface
             return true;
         }
 
-        if (array_key_exists($offset, $this->aliases)) {
-            return $this->offsetExists($this->aliases[$offset]);
-        }
-
         return false;
     }
 
@@ -87,10 +71,6 @@ class SilexApplicationEmulation implements \ArrayAccess, ContainerAwareInterface
         }
         if ($this->container->has($offset)) {
             return $this->container->get($offset);
-        }
-
-        if (array_key_exists($offset, $this->aliases)) {
-            return $this->offsetGet($this->aliases[$offset]);
         }
 
         return;
@@ -119,17 +99,12 @@ class SilexApplicationEmulation implements \ArrayAccess, ContainerAwareInterface
         }
 
         if ($this->container->has($offset)) {
-            $this->container->get($offset, $value);
+            $this->container->set($offset, $value);
             return;
         }
 
-
-        if (array_key_exists($offset, $this->aliases)) {
-            return $this->offsetSet($this->aliases[$offset], $value);
-        }
-
         if (is_object($value)) {
-            $this->container->get($offset, $value);
+            $this->container->set($offset, $value);
             return;
         }
 
@@ -157,11 +132,6 @@ class SilexApplicationEmulation implements \ArrayAccess, ContainerAwareInterface
         if ($this->container->has($offset)) {
             $this->container->set($offset, null);
             return;
-        }
-
-
-        if (array_key_exists($offset, $this->aliases)) {
-            return $this->offsetUnset($this->aliases[$offset]);
         }
     }
 
