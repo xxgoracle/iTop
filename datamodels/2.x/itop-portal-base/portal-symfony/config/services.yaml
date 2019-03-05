@@ -98,3 +98,7 @@ services:
     lifecycle_validator:
         alias: Combodo\iTop\Portal\Helper\LifecycleValidatorHelper
         public: true
+
+    url_generator:
+        alias: router
+        public: true

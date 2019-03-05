@@ -17,8 +17,9 @@ class SilexApplicationEmulation implements \ArrayAccess, ContainerAwareInterface
     /** @var ContainerInterface */
     private $container;
 
+    //TODO: remove this var, becausel it is no more required since services alias are defined.
     private $aliases = array(
-      'url_generator' => 'router',
+//      'url_generator' => 'router',
     );
 
 
